@@ -22,7 +22,7 @@ var button = tabris.create("Button", {
 
 var items = ["North", "East", "South", "West"];
 
-tabris.create("Picker", {
+var picker = tabris.create("Picker", {
   layoutData: {left: 20, top: 20, right: 20},
   items: items,
   selectionIndex: 1
