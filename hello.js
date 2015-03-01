@@ -8,7 +8,7 @@ var page2 = tabris.create("Page", {
   topLevel: true
 });
 
-var label = tabris.create("Label", {
+var label = tabris.create("TextView", {
   font: "24px",
   layoutData: {centerX: 0, top: [button, 50]}
 }).appendTo(page);
@@ -22,7 +22,7 @@ var button = tabris.create("Button", {
 
 var items = ["North", "East", "South", "West"];
 
-var picker = tabris.create("Picker", {
+var picker = tabris.create("Picker2", {
   layoutData: {left: 20, top: 20, right: 20},
   items: items,
   selectionIndex: 1
