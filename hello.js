@@ -3,6 +3,11 @@ var page = tabris.create("Page", {
   topLevel: true
 });
 
+var page2 = tabris.create("Page", {
+  title: "Page2",
+  topLevel: true
+});
+
 var button = tabris.create("Button", {
   text: "Native Widgets",
   layoutData: {centerX: 0, top: 100}
