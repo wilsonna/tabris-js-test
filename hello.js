@@ -8,18 +8,27 @@ var page2 = tabris.create("Page", {
   topLevel: true
 });
 
-var button = tabris.create("Button", {
-  text: "Native Widgets",
-  layoutData: {centerX: 0, top: 100}
-}).appendTo(page);
-
 var label = tabris.create("Label", {
   font: "24px",
   layoutData: {centerX: 0, top: [button, 50]}
 }).appendTo(page);
 
-button.on("selection", function() {
+var button = tabris.create("Button", {
+  text: "Native Widgets",
+  layoutData: {centerX: 0, top: 100}
+}).on("selection", function() {
   label.set("text", "Totally Rock!");
-});
+}).appendTo(page);
+
+var items = ["North", "East", "South", "West"];
+
+tabris.create("Picker", {
+  layoutData: {left: 20, top: 20, right: 20},
+  items: items,
+  selectionIndex: 1
+}).on("change:selection", function() {
+  var selectionIndex = this.get("selectionIndex");
+  console.log("Heading " + items[selectionIndex]);
+}).appendTo(page);
 
 page.open();
