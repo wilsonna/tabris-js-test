@@ -1,5 +1,6 @@
 var page = tabris.create("Page", {
   title: "Hello, World 1.1!",
+  background: "red",
   topLevel: true
 });
 
@@ -19,7 +20,7 @@ var button = tabris.create("Button", {
 }).on("selection", function() {
   label.set("text", "Totally Rock!");
 }).appendTo(page);
-
+/*
 var items = ["North", "East", "South", "West"];
 
 var picker = tabris.create("Picker", {
@@ -30,5 +31,5 @@ var picker = tabris.create("Picker", {
   var selectionIndex = this.get("selectionIndex");
   console.log("Heading " + items[selectionIndex]);
 }).appendTo(page);
-
+*/
 page.open();
