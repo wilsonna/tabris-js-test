@@ -1,9 +1,9 @@
+tabris.ui.set("background", "red");
+
 var page = tabris.create("Page", {
   title: "Hello, World 1.1!",
   topLevel: true
 });
-
-tabris.ui.background = "red";
 
 var page2 = tabris.create("Page", {
   title: "Page2",
