@@ -1,5 +1,5 @@
 tabris.ui.set("background", "#A31919");
-tabris.ui.set("foreground", "white");
+// tabris.ui.set("foreground", "white");
 
 var page = tabris.create("Page", {
   title: "Hello, World 1.1!",
