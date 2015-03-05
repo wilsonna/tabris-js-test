@@ -1,8 +1,11 @@
 var page = tabris.create("Page", {
   title: "Hello, World 1.1!",
-  background: "red",
   topLevel: true
 });
+
+var ui = tabris.create("_UI", {
+  background: "red"
+}).activePage.set(page);
 
 var page2 = tabris.create("Page", {
   title: "Page2",
