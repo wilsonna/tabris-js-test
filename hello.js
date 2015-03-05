@@ -3,9 +3,7 @@ var page = tabris.create("Page", {
   topLevel: true
 });
 
-var ui = tabris.create("_UI", {
-  background: "red"
-}).activePage.set(page);
+tabris.ui.background = "red";
 
 var page2 = tabris.create("Page", {
   title: "Page2",
