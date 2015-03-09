@@ -1,7 +1,9 @@
 {
-  "title": "Hello, World!",
-  "description": "Tabris.js - Hello, World!",
-  "category": "Small Apps",
-  "tabris": "https://tabrisjs.com/downloads/nightly/tabris.min.js",
-  "main": "hello.js"
+    "title": "Tabris.js Test",
+    "description": "Tabris.js Test",
+    "category": "Small Apps",
+    "main": "app.js",
+    "dependencies": {
+        "tabris": "0.9.2"
+    }
 }
