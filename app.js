@@ -13,6 +13,14 @@ console.log(tabris.ui._shell.get("mode"));
 console.log(tabris.device.get("model") + ", " + tabris.device.get("platform") + " ver. " + tabris.device.get("version") + ", " + tabris.device.get("language"));
 console.log(tabris.device.get("orientation") + ", " + screenWidth + " x " + screenHeight);
 
+
+var drawer = tabris.create("Drawer");
+tabris.create("PageSelector", {
+    layoutData: {left: 0, top: 0, right: 0, bottom: 0}
+}).appendTo(drawer);
+
+
+
 /*
  * Actions
  */
@@ -51,7 +59,7 @@ var cartAction = tabris.create("Action", {
 var cataloguePage = tabris.create("Page", {
     title: "Catalogue",
     topLevel: true,
-    image: "img/cart_small.png"
+    image: "img/catalogue_small.png"
 }).on("appear", function() {
     searchAction.set("visible", true);
 }).on("disappear", function() {
