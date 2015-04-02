@@ -143,7 +143,7 @@ var populateTab = function(id) {
     });
     tab.children().dispose();
 
-    var productsComposite = tabris.create("ScrollComposite", {
+    var productsComposite = tabris.create("ScrollView", {
         layoutData: {left: 0, right: 0, top: [productsPage.children().last(), 0], bottom: 0},
         direction: "vertical"
     }).appendTo(tab);
@@ -230,7 +230,7 @@ function showCategories() {
 //    console.log("categoryWidth: " + categoryWidth);
 //    console.log("categoryHeight: " + categoryHeight);
 
-    var categoriesComposite = tabris.create("ScrollComposite", {
+    var categoriesComposite = tabris.create("ScrollView", {
         layoutData: {left: 0, right: 0, top: [cataloguePage.children().last(), 0], bottom: 0},
         direction: "vertical"
     }).appendTo(cataloguePage);
