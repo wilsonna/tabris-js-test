@@ -13,9 +13,15 @@
     <author email="wilson_na@yahoo.com.sg" href="http://www.ubiqworks.com">
         Wilson Na
     </author>
-    <icon src="img/icon_big.png" />
  
     <access origin="*" />
  
     <preference name="EnableDeveloperConsole" value="false"/>
+    
+    <platform name="android">
+        <icon src="img/icon_big.png" />
+    </platform>
+    <platform name="ios">
+        <icon src="img/icon_big.png" />
+    </platform>
 </widget>
