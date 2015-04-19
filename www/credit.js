@@ -1,11 +1,28 @@
 tabris.create("Page", {
+    id: "page-account",
     title: "My Account",
     topLevel: true,
     image: "img/account_small.png"
 });
 
 var page = tabris.create("Page", {
+    id: "page-credit",
     title: "My Credit Details",
+    topLevel: true,
+    image: "img/bullet_small.png"
+});
+
+tabris.create("Page", {
+    id: "page-measurement",
+    title: "My Measurements",
+    topLevel: true,
+    font: "8px",
+    image: "img/bullet_small.png"
+});
+
+tabris.create("Page", {
+    id: "page-orders",
+    title: "My Orders",
     topLevel: true,
     image: "img/bullet_small.png"
 });

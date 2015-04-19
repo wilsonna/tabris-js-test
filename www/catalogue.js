@@ -1,26 +1,30 @@
 // var device = require("./device.js");
-var data = require("./data.js");
-var action = require("./action.js");
-var hidden = require("./hidden.js");
+var dataModule = require("./data.js");
+var actionModule = require("./action.js");
+var hiddenModule = require("./hidden.js");
 
 var minCategoryWidth = 180;
 var minCategoryHeight = 175;
 var minProductWidth = 180;
 var minProductHeight = 200;
 
-var categories = data.categories;
-var products = data.products;
+var categories = dataModule.categories;
+var products = dataModule.products;
 
 
 var cataloguePage = tabris.create("Page", {
+    id: "page-catalogue",
     title: "Catalogue",
     topLevel: true,
+    style: ["FULLSCREEN"],
     image: "img/catalogue_small.png"
 }).on("appear", function() {
-    action.search.set("visible", true);
+    actionModule.search.set("visible", true);
 }).on("disappear", function() {
-    action.search.set("visible", false);
+    actionModule.search.set("visible", false);
 });
+
+actionModule.createActionBar(cataloguePage);
 
 
 
@@ -32,7 +36,7 @@ var tabFolder = tabris.create("TabFolder", {
 }).on("change:selection", function(event) {
     tabris.ui.children("#productsPage")[0].set("title", this.get("selection").get("title"));
     // populateTab(this.get("selection").get("id"));
-}).appendTo(hidden.page);
+}).appendTo(hiddenModule.page);
 
 var createTab = function(id, title, image) {
     var tab = tabris.create("Tab", {
@@ -106,7 +110,7 @@ function populateCategories() {
     var categoryHeight = minCategoryHeight * categoryWidth / minCategoryWidth;
     
     var creditSummaryBar = tabris.create("Composite", {
-        layoutData: {top: 0, left: 0, right: 0},
+        layoutData: {top: [cataloguePage.children().last(), 0], left: 0, right: 0},
         background: "black"
     }).appendTo(cataloguePage);
 
@@ -153,7 +157,7 @@ function populateCategories() {
             }).on("appear", function() {
                 tabFolder.set("selection", tabFolder.find("#" + category.id)[0]);
             }).on("dispose", function() { // park the tabFolder to the hiddenPage so that it would not get disposed with ProductsPage
-                tabFolder.appendTo(hidden.page);
+                tabFolder.appendTo(hiddenModule.page);
             });
             tabFolder.appendTo(productsPage);
             productsPage.open();
