@@ -18,10 +18,6 @@
  
     <preference name="EnableDeveloperConsole" value="false"/>
     
-    <platform name="android">
-        <icon src="img/icon_big.png" />
-    </platform>
-    <platform name="ios">
-        <icon src="img/icon_big.png" />
-    </platform>
+    
+    <icon src="www/img/icon_big.png" />
 </widget>
