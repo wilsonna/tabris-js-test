@@ -35,19 +35,29 @@ var cartAction = tabris.create("Action", {
 });
 
 // Fake Action Bar
-var createActionBar = function(page) {
+var createActionBar = function(page, options) {
     var actionBar = new tabris.create("Composite", {
         layoutData: {left: 0, top: 0, right: 0, height: 45},
         background: "#A31919"
     }).appendTo(page);
 
-    var menuImage = tabris.create("ImageView", {
-        layoutData: {top: 8, left: 5, height: 30},
-        image: "img/menu.png",
-        highlightOnTouch: true
-    }).on("tap", function() {
-        drawerModule.drawer.open();
-    }).appendTo(actionBar);
+    if (page.get("topLevel")) {
+        var menuImage = tabris.create("ImageView", {
+            layoutData: {top: 8, left: 5, height: 30},
+            image: "img/menu.png",
+            highlightOnTouch: true
+        }).on("tap", function() {
+            drawerModule.drawer.open();
+        }).appendTo(actionBar);
+    } else {
+        var backImage = tabris.create("ImageView", {
+            layoutData: {top: 8, left: 5, height: 30},
+            image: "img/back.png",
+            highlightOnTouch: true
+        }).on("tap", function() {
+            page.close();
+        }).appendTo(actionBar);
+    }
     /*
 var pageImage = tabris.create("ImageView", {
     layoutData: {top: 8, left: [actionBar.children().last(), 5], height: 30},
@@ -58,8 +68,9 @@ var pageImage = tabris.create("ImageView", {
 }).appendTo(actionBar);
 */
     var pageTitle = tabris.create("TextView", {
+        id: "page-title",
         layoutData: {top: 10, left: [actionBar.children().last(), 5], height: 30},
-        foreground: "white",
+        textColor: "white",
         font: "18px",
         text: page.get("title"),
         highlightOnTouch: true
@@ -79,15 +90,17 @@ var textView = tabris.create("TextView", {
     layoutData: {centerX: 0, centerY: 0}
 }).appendTo(searchResultPage);
 */
-    var searchAction = tabris.create("ImageView", {
-        // title: "Search",
-        // visible: false,
-        layoutData: {top: 8, right: [actionBar.children().last(), 5], height: 30},
-        image: "img/search.png",
-        highlightOnTouch: true
-    }).on("tap", function() {
-        console.log("Search selected.");
-    }).appendTo(actionBar);
+    if (options && options.search) {
+        var searchAction = tabris.create("ImageView", {
+            // title: "Search",
+            // visible: false,
+            layoutData: {top: 8, right: [actionBar.children().last(), 5], height: 30},
+            image: "img/search.png",
+            highlightOnTouch: true
+        }).on("tap", function() {
+            console.log("Search selected.");
+        }).appendTo(actionBar);
+    }
     /*
 .on("modify", function(event) {
     this.set("proposals", proposals.filter(function(proposal) {

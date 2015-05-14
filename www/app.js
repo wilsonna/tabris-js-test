@@ -1,6 +1,6 @@
 tabris.ui.set("image", "img/icon_big.png");
 tabris.ui.set("background", "#A31919");
-// tabris.ui.set("foreground", "white");
+// tabris.ui.set("textColor", "white");
 
 
 
@@ -11,6 +11,7 @@ var catalogueModule = require("./catalogue.js");
 var creditModule = require("./credit.js");
 
 var pages = {
+    credit: creditModule.page,
     catalogue: catalogueModule.page//,
     //products: catalogue.productsPage
 };
@@ -63,4 +64,4 @@ tabris.ui.children("Page").filter(function(page) {
 });
 
 
-pages.catalogue.open();
+pages.credit.open();

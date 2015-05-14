@@ -12,29 +12,32 @@ var categories = dataModule.categories;
 var products = dataModule.products;
 
 
-var cataloguePage = tabris.create("Page", {
-    id: "page-catalogue",
-    title: "Catalogue",
-    topLevel: true,
-    style: ["FULLSCREEN"],
-    image: "img/catalogue_small.png"
-}).on("appear", function() {
-    actionModule.search.set("visible", true);
-}).on("disappear", function() {
-    actionModule.search.set("visible", false);
-});
+// Credit Summary Bar
+var createCreditSummaryBar = function(page) {
+    var creditSummaryBar = tabris.create("Composite", {
+        layoutData: {top: [page.children().last(), 0], left: 0, right: 0},
+        background: "black"
+    }).appendTo(page);
 
-actionModule.createActionBar(cataloguePage);
-
-
+    var creditSummaryText = tabris.create("TextView", {
+        layoutData: {left: 5, top: 3, height: 28},
+        markupEnabled: true,
+        font: "18px",
+        textColor: "white",
+        text: "Balance: <b>119.00</b> &nbsp;&nbsp; Cart: <b>115.25</b> + <b>$68.50</b>"
+    }).appendTo(creditSummaryBar);
+}
 
 // Tab
 var tabFolder = tabris.create("TabFolder", {
-    layoutData: {left: 0, top: 0, right: 0, bottom: 0},
-    // foreground: "#A31919",
+    layoutData: {left: 0, top: 75, right: 0, bottom: 0},
+    textColor: "#EEEEEE", // even the text would be red -_-
+    background: "#A31919",
     paging: true // enables swiping. To still be able to open the developer console in iOS, swipe from the bottom right.
 }).on("change:selection", function(event) {
-    tabris.ui.children("#productsPage")[0].set("title", this.get("selection").get("title"));
+    var title = this.get("selection").get("title");
+    tabris.ui.get("activePage").set("title", title);
+    tabris.ui.get("activePage").find("#page-title").set("text", title);
     // populateTab(this.get("selection").get("id"));
 }).appendTo(hiddenModule.page);
 
@@ -43,6 +46,7 @@ var createTab = function(id, title, image) {
         id: id,
         title: title, // converted to upper-case on Android
         // badge: "1", // a circle with a number inside. doesn't seem to be working
+        background: "white",
         image: {src: image, scale: 2} // image only used by iOS
     }).appendTo(tabFolder);
 };
@@ -76,7 +80,7 @@ var populateTab = function(id) {
             layoutData: {left: 10, top: [nameTextView, 0], right: 10},
             alignment: "center",
             markupEnabled: true,
-            foreground: "#A31919",
+            textColor: "#A31919",
             font: "16px",
             text: "Online <b>$" + Number(product.onlinePrice).toFixed(2) + "</b>"
         });
@@ -101,27 +105,29 @@ var populateTab = function(id) {
     });
 };
 
+
 /*
  * Catalogue Page
  */
+var cataloguePage = tabris.create("Page", {
+    id: "page-catalogue",
+    title: "Catalogue",
+    topLevel: true,
+    style: ["FULLSCREEN"],
+    image: "img/catalogue_small.png"
+}).on("appear", function() {
+    actionModule.search.set("visible", true);
+}).on("disappear", function() {
+    actionModule.search.set("visible", false);
+});
+actionModule.createActionBar(cataloguePage, {search:true});
+createCreditSummaryBar(cataloguePage);
+
 function populateCategories() {
     var itemsPerRow = Math.floor(tabris.device.get("screenWidth") / minCategoryWidth);
     var categoryWidth = tabris.device.get("screenWidth") / itemsPerRow;
     var categoryHeight = minCategoryHeight * categoryWidth / minCategoryWidth;
     
-    var creditSummaryBar = tabris.create("Composite", {
-        layoutData: {top: [cataloguePage.children().last(), 0], left: 0, right: 0},
-        background: "black"
-    }).appendTo(cataloguePage);
-
-    var creditSummaryText = tabris.create("TextView", {
-        layoutData: {left: 5, top: 3, bottom: 3},
-        markupEnabled: true,
-        font: "18px",
-        foreground: "white",
-        text: "Balance: <b>119.00</b> &nbsp;&nbsp; Cart: <b>115.25</b> + <b>$68.50</b>"
-    }).appendTo(creditSummaryBar);
-
     var categoriesComposite = tabris.create("ScrollView", {
         layoutData: {left: 0, right: 0, top: [cataloguePage.children().last(), 0], bottom: 0},
         direction: "vertical"
@@ -153,12 +159,15 @@ function populateCategories() {
         composite.on("tap", function() {
             //tabFolder.set("selection", category.id);
             var productsPage = tabris.create("Page", {
-                id: "productsPage",
+                // id: "productsPage",
+                style: ["FULLSCREEN"]
             }).on("appear", function() {
                 tabFolder.set("selection", tabFolder.find("#" + category.id)[0]);
             }).on("dispose", function() { // park the tabFolder to the hiddenPage so that it would not get disposed with ProductsPage
                 tabFolder.appendTo(hiddenModule.page);
             });
+            actionModule.createActionBar(productsPage, {search:true});
+            createCreditSummaryBar(productsPage);
             tabFolder.appendTo(productsPage);
             productsPage.open();
         });

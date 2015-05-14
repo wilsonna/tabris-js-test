@@ -1,3 +1,8 @@
+var dataModule = require("./data.js");
+var util = require("./util.js");
+
+var serviceman = dataModule.serviceman;
+
 var drawer = tabris.create("Drawer");
 var drawerComposite = tabris.create("ScrollView").appendTo(drawer);
 tabris.create("ImageView", {
@@ -14,16 +19,16 @@ var servicemanInfoComposite = tabris.create("Composite", {
 }).appendTo(divider);
 tabris.create("TextView", {
     layoutData: {top: 10, left: 10},
-    font: "bold 15px",
-    foreground: "gray",
-    text: "Anderson Kang Lee Hon (S8146733E)" 
+    font: "bold 17px",
+    textColor: "gray",
+    text: serviceman.rank + " " + serviceman.name
 }).appendTo(servicemanInfoComposite);
 tabris.create("TextView", {
     layoutData: {top: [servicemanInfoComposite.children().last(), 5], left: 10},
     font: "15px",
-    foreground: "gray",
+    textColor: "gray",
     markupEnabled: true,
-    text: "Credit Balance <b>234.25</b> thru <b>01-AUG-2016</b>" 
+    text: "Credit Balance <b>" + serviceman.creditBalance + "</b>"
 }).appendTo(servicemanInfoComposite);
 tabris.create("Composite", {
     layoutData: {top: [servicemanInfoComposite.children().last(), 10], left: 0, right: 0, height: 15},
@@ -59,7 +64,7 @@ var createPageSelector = function(page) {
         pageSelectorComposite.children("Composite").filter(function(e) {
             e.set("background", (e == composite) ? "#EEEEEE" : "white");
             e.children("TextView").set({
-                foreground: (e == composite) ? "#A31919" : "black",
+                textColor: (e == composite) ? "#A31919" : "black",
                 font: (e == composite) ? "bold 15px" : "15px"
             });
         });

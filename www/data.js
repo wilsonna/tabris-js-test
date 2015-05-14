@@ -29,3 +29,18 @@ exports.products = [
 ].map(function(element) {
     return {productName: element[0], onlinePrice: element[1], outletPrice: element[2], image: element[3]};
 });
+
+exports.serviceman = {
+    name: "Anderson Kang Lee Hon",
+    rank: "CPL",
+    nricNo: "S8146733E",
+    service: "Army",
+    tos: "Regular",
+    status: "Active",
+    creditBalance: 234.25,
+    creditLimit: 260,
+    lastTopupDate: '2014-08-01T00:00:00.000Z',
+    nextTopupDate: '2016-08-01T00:00:00.000Z',
+    creditExpiring: 0
+};
+
